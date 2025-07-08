@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import math
 from pathlib import Path
+import glob
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
@@ -98,8 +99,8 @@ st.write(selected_row)
 
 st.image('1_2_A1094_1.jpg')
 
-# for str_img in file_paths:
-#     st.image(str_img, caption="M2c data for ...")
+for str_img in file_paths:
+    st.image(str_img, caption="M2c data for ...")
 
 
 # -----------------------------------------------------------------------------
