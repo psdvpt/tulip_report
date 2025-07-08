@@ -58,94 +58,61 @@ def get_gdp_data():
     return gdp_df
 
 gdp_df = get_gdp_data()
+df = pd.read_parquet('junk.parquet')
+print(df)
+# Using object notation
+selected_id = st.sidebar.selectbox(
+    "Select Site",
+    df['site_name']
+)
+selected_row = df[df['site_name'] == selected_id]
+print('Selected row = ', selected_row)
+site_names = selected_row["site_name"].to_list()
+print('site_name',site_names[0])
 
 # -----------------------------------------------------------------------------
 # Draw the actual page
 
 # Set the title that appears at the top of the page.
 '''
-# :earth_americas: GDP dashboard
+# :earth_americas: TULP Report
 
-Browse GDP data from the [World Bank Open Data](https://data.worldbank.org/) website. As you'll
-notice, the data only goes to 2022 right now, and datapoints for certain years are often missing.
-But it's otherwise a great (and did I mention _free_?) source of data.
+View the M2C data for a selection of sites in Canada.
 '''
 
 # Add some spacing
 ''
 ''
 
-min_value = gdp_df['Year'].min()
-max_value = gdp_df['Year'].max()
+st.write(df)
 
-from_year, to_year = st.slider(
-    'Which years are you interested in?',
-    min_value=min_value,
-    max_value=max_value,
-    value=[min_value, max_value])
+pattern = '/home/andy/Downloads/rf_data_imaging/*_*_{}_*.jpg'.format(site_names[0])
+file_paths = glob.glob(pattern)
 
-countries = gdp_df['Country Code'].unique()
+if file_paths:
+    print(file_paths)  # prints the first matching file path
+else:
+    print("No files found matching the pattern")
 
-if not len(countries):
-    st.warning("Select at least one country")
+st.write(selected_row)
 
-selected_countries = st.multiselect(
-    'Which countries would you like to view?',
-    countries,
-    ['DEU', 'FRA', 'GBR', 'BRA', 'MEX', 'JPN'])
+st.image('1_2_A1094_1.jpg')
 
-''
-''
-''
+# for str_img in file_paths:
+#     st.image(str_img, caption="M2c data for ...")
 
-# Filter the data
-filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
-    & (gdp_df['Year'] <= to_year)
-    & (from_year <= gdp_df['Year'])
-]
 
-st.header('GDP over time', divider='gray')
+# -----------------------------------------------------------------------------
+# Draw the actual page
 
-''
+# Set the title that appears at the top of the page.
+'''
+# :earth_americas: TULP Report
 
-st.line_chart(
-    filtered_gdp_df,
-    x='Year',
-    y='GDP',
-    color='Country Code',
-)
+View the M2C data for a selection of sites in Canada.
+'''
 
+# Add some spacing
 ''
 ''
 
-
-first_year = gdp_df[gdp_df['Year'] == from_year]
-last_year = gdp_df[gdp_df['Year'] == to_year]
-
-st.header(f'GDP in {to_year}', divider='gray')
-
-''
-
-cols = st.columns(4)
-
-for i, country in enumerate(selected_countries):
-    col = cols[i % len(cols)]
-
-    with col:
-        first_gdp = first_year[first_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-        last_gdp = last_year[last_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-
-        if math.isnan(first_gdp):
-            growth = 'n/a'
-            delta_color = 'off'
-        else:
-            growth = f'{last_gdp / first_gdp:,.2f}x'
-            delta_color = 'normal'
-
-        st.metric(
-            label=f'{country} GDP',
-            value=f'{last_gdp:,.0f}B',
-            delta=growth,
-            delta_color=delta_color
-        )
