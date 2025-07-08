@@ -87,7 +87,7 @@ View the M2C data for a selection of sites in Canada.
 
 st.write(df)
 
-pattern = '/home/andy/Downloads/rf_data_imaging/*_*_{}_*.jpg'.format(site_names[0])
+pattern = '*_*_{}_*.jpg'.format(site_names[0])
 file_paths = glob.glob(pattern)
 
 if file_paths:
