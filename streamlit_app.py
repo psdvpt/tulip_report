@@ -75,7 +75,7 @@ selected_id = st.sidebar.selectbox(
 selected_row = df[df['site_name'] == selected_id]
 #print('Selected row = ', selected_row)
 site_names = selected_row["site_name"].to_list()
-#print('site_name',site_names[0])
+site_name = site_names[0]
 
 # -----------------------------------------------------------------------------
 # Draw the actual page   
