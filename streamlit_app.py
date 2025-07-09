@@ -19,7 +19,12 @@ st.set_page_config(
 @st.cache_data
 def get_canada_data():
     df = pd.read_parquet('tlup_canada.parquet')
-    return df    
+    return df
+@st.cache_data
+
+def def get_atlup_sum()
+    df = pd.read_parquet('atlup_sum.parquet')
+    return df
 
 @st.cache_data
 def get_gdp_data():
@@ -133,7 +138,7 @@ with tab2:
         #print(filename)  # Output: 1_3_A1094_3.jpg
         parts = filename.split('_')
         last_part = parts[-1].split('.')[0]
-        str_range = "range: {} km".format(last_part)
+        str_range = "Range: {} km".format(last_part)
         st.header(str_range)
         st.image(str_img, caption="M2c data for ...")
 
@@ -149,7 +154,8 @@ with tab3:
     st.header("ATLUP Summary")
     st.write("**{}**".format(site_name))
 
-    df_sum = pd.read_parquet('atlup_sum.parquet')
+    #df_sum = pd.read_parquet('atlup_sum.parquet')
+    df_sum = get_atlup_sum()
     selected_row_sum = df_sum[df_sum['site'] == selected_id]
 
     st.write(selected_row_sum)
