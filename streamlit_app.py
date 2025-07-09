@@ -20,10 +20,20 @@ st.set_page_config(
 def get_canada_data():
     df = pd.read_parquet('tlup_canada.parquet')
     return df
+    
 @st.cache_data
-
 def get_atlup_sum():
     df = pd.read_parquet('atlup_sum.parquet')
+    return df
+
+@st.cache_data
+def get_atlup_strength():
+    df = pd.read_parquet('atlup_strength.parquet')
+    return df
+
+@st.cache_data
+def get_atlup_quality():
+    df = pd.read_parquet('atlup_quality.parquet')
     return df
 
 @st.cache_data
@@ -167,7 +177,8 @@ with tab4:
     st.header("Signal Strength")
     st.write("Analysis of signal strength (rsrp).")
 
-    df_str = pd.read_parquet('atlup_strength.parquet')
+    #df_str = pd.read_parquet('atlup_strength.parquet')
+    df_str = get_atlup_strength()
     selected_row_str = df_str[df_str['Site'] == selected_id]
     st.write("**{}**".format(selected_id) )  
     st.write(selected_row_str)
@@ -179,7 +190,8 @@ with tab5:
     st.header("Signal Quality")
     st.write("Analysis of signal strength (rsrq).")
 
-    df_qlt = pd.read_parquet('atlup_quality.parquet')
+    #df_qlt = pd.read_parquet('atlup_quality.parquet')
+    df _qlt = get_atlup_quality()
     selected_row_qlt = df_qlt[df_qlt['Site'] == selected_id]
     st.write("**{}**".format(selected_id) )   
     st.write(selected_row_qlt)
