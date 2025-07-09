@@ -17,6 +17,11 @@ st.set_page_config(
 # Declare some useful functions.
 
 @st.cache_data
+def get_canada_data():
+    df = pd.read_parquet('tlup_canada.parquet')
+    return df    
+
+@st.cache_data
 def get_gdp_data():
     """Grab GDP data from a CSV file.
 
@@ -65,8 +70,9 @@ def get_gdp_data():
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Scope", "TLUP", "ATLUP Summary", "Strength","Quality"])
 
 
-df = pd.read_parquet('tlup_canada.parquet')
-print(df)
+#df = pd.read_parquet('tlup_canada.parquet')
+df = get_canada_data()
+#print(df)
 # Using object notation
 selected_id = st.sidebar.selectbox(
     "Select Site",
@@ -161,40 +167,15 @@ with tab4:
 with tab5:
     st.header("Signal Quality")
     st.write("Analysis of signal strength (rsrq).")
+
+    
     df_qlt = pd.read_parquet('atlup_quality.parquet')
+    selected_row_qlt = df_qlt[df_qlt['site'] == selected_id]
+
+    
+    st.write(selected_row_qlt)
+    st.write('**All data**')
     st.write(df_qlt)
 
 
-
-# st.write(df)
-
-# pattern = '*_*_{}_*.jpg'.format(site_names[0])
-# file_paths = glob.glob(pattern)
-
-# if file_paths:
-#     print(file_paths)  # prints the first matching file path
-# else:
-#     print("No files found matching the pattern")
-
-# st.write(selected_row)
-
-# st.image('1_2_A1094_1.jpg')
-
-# for str_img in file_paths:
-#     st.image(str_img, caption="M2c data for ...")
-
-
-# # -----------------------------------------------------------------------------
-# # Draw the actual page
-
-# # Set the title that appears at the top of the page.
-# '''
-# # :earth_americas: TULP Report
-
-# View the M2C data for a selection of sites in Canada.
-# '''
-
-# # Add some spacing
-# ''
-# ''
 
