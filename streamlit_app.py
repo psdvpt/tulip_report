@@ -162,6 +162,11 @@ with tab4:
     st.write("Analysis of signal strength (rsrp).")
 
     df_str = pd.read_parquet('atlup_strength.parquet')
+    selected_row_str = df_str[df_str['Site'] == selected_id]
+    st.write("**{}**".format(selected_id) )  
+    st.write(selected_row_str)
+
+    st.write('**All data**')    
     st.write(df_str)
 
 with tab5:
