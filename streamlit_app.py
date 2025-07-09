@@ -22,7 +22,7 @@ def get_canada_data():
     return df
 @st.cache_data
 
-def get_atlup_sum()
+def get_atlup_sum():
     df = pd.read_parquet('atlup_sum.parquet')
     return df
 
