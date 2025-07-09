@@ -6,7 +6,7 @@ import glob
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
-    page_title='GDP dashboard',
+    page_title='Ambiflo',
     page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
 )
 
@@ -58,8 +58,11 @@ def get_gdp_data():
 
     return gdp_df
 
-gdp_df = get_gdp_data()
-df = pd.read_parquet('junk.parquet')
+#gdp_df = get_gdp_data()
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Scope", "TLUP", "ATLUP Summary", "Strength","Quality"])
+
+
+df = pd.read_parquet('tlup_canada.parquet')
 print(df)
 # Using object notation
 selected_id = st.sidebar.selectbox(
