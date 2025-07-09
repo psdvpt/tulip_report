@@ -78,7 +78,7 @@ site_names = selected_row["site_name"].to_list()
 # Draw the actual page   
 st.set_page_config(layout="wide")
 with tab1:
-        #st.image('/home/andy/data/redwood/ambiflo_icon.png', width = 300)
+        #st.image('ambiflo_icon.png', width = 300)
         df_loc = pd.read_parquet('tlup_loc.parquet')
         
         st.title("TLUP reports")
