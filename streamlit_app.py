@@ -78,89 +78,88 @@ site_names = selected_row["site_name"].to_list()
 # Draw the actual page   
 st.set_page_config(layout="wide")
 with tab1:
-        #st.image('ambiflo_icon.png', width = 300)
-        df_loc = pd.read_parquet('tlup_loc.parquet')
-        
-        st.title("TLUP reports")
-        st.write("Prepared for Redwood Infrastructure LP. July 2025")
-        st.header("Site Locations")
+    #st.image('ambiflo_icon.png', width = 300)
+    df_loc = pd.read_parquet('tlup_loc.parquet')
     
-        # Create a Folium map
-        m = folium.Map(location=[52.1304, -100.3468], zoom_start=3)
+    st.title("TLUP reports")
+    st.write("Prepared for Redwood Infrastructure LP. July 2025")
+    st.header("Site Locations")
 
-        # Add markers with labels to the map
-        for index, row in df_loc.iterrows():
-            popup = "{}: {}".format(index, row['site_id'])
-            folium.Marker([row['lat'], row['lon']], popup=popup).add_to(m)
+    # Create a Folium map
+    m = folium.Map(location=[52.1304, -100.3468], zoom_start=3)
 
-
-        # Display the map in Streamlit
-        folium_static(m)
-
-        st.write("**Locations**")
-        with st.container():
-            st.write(f'<div style="max-width: 500px;">{df_loc.to_html()}</div>', unsafe_allow_html=True)
-
-    with tab2:
-
-        st.header("TLUP")
-        st.write("This is the standard TLUP report. Use the other tabs  for ATLUP summary and analysis of signal strength and quality.")
-        st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
-
-        # match images with selection
-        pattern = '*_*_{}_*.jpg'.format(site_names[0])
-        file_paths = glob.glob(pattern)
-        sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
-
-        str_header = "**{}**".format(site_name)
-        st.write(str_header)
-
-        # Highlight Column 2 with a background color
-        df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
-        st.dataframe(df_highlighted)
+    # Add markers with labels to the map
+    for index, row in df_loc.iterrows():
+        popup = "{}: {}".format(index, row['site_id'])
+        folium.Marker([row['lat'], row['lon']], popup=popup).add_to(m)
 
 
-        for str_img in sorted_paths:
-            filename = os.path.basename(str_img)
-            #print(filename)  # Output: 1_3_A1094_3.jpg
-            parts = filename.split('_')
-            last_part = parts[-1].split('.')[0]
-            str_range = "range: {} km".format(last_part)
-            st.header(str_range)
-            st.image(str_img, caption="M2c data for ...")
+    # Display the map in Streamlit
+    folium_static(m)
+
+    st.write("**Locations**")
+    with st.container():
+        st.write(f'<div style="max-width: 500px;">{df_loc.to_html()}</div>', unsafe_allow_html=True)
+
+with tab2:
+    st.header("TLUP")
+    st.write("This is the standard TLUP report. Use the other tabs  for ATLUP summary and analysis of signal strength and quality.")
+    st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
+
+    # match images with selection
+    pattern = '*_*_{}_*.jpg'.format(site_names[0])
+    file_paths = glob.glob(pattern)
+    sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
+
+    str_header = "**{}**".format(site_name)
+    st.write(str_header)
+
+    # Highlight Column 2 with a background color
+    df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
+    st.dataframe(df_highlighted)
 
 
-        st.header('All Sites')
-        # Highlight Column 2 with a background color
-        df_highlighted = df.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
-
-        st.dataframe(df_highlighted)
-
-
-    with tab3:
-        st.header("ATLUP Summary")
-        st.write("**{}**".format(site_name))
-
-        df_sum = pd.read_parquet('atlup_sum.parquet')
-        selected_row_sum = df_sum[df_sum['site'] == selected_id]
-
-        st.write(selected_row_sum)
-        st.write("**All sites**")
-        st.write(df_sum)
+    for str_img in sorted_paths:
+        filename = os.path.basename(str_img)
+        #print(filename)  # Output: 1_3_A1094_3.jpg
+        parts = filename.split('_')
+        last_part = parts[-1].split('.')[0]
+        str_range = "range: {} km".format(last_part)
+        st.header(str_range)
+        st.image(str_img, caption="M2c data for ...")
 
 
-    with tab4:
-        st.header("Signal Strength")
-        st.write("Analysis of signal strength (rsrp).")
+    st.header('All Sites')
+    # Highlight Column 2 with a background color
+    df_highlighted = df.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
 
-        df_str = pd.read_parquet('atlup_strength.parquet')
-        st.write(df_str)
+    st.dataframe(df_highlighted)
 
-    with tab5:
-        st.header("Signal Quality")
-        st.write("Analysis of signal strength (rsrq).")
-        df_qlt = pd.read_parquet('atlup_quality.parquet')
-        st.write(df_qlt)
+
+with tab3:
+    st.header("ATLUP Summary")
+    st.write("**{}**".format(site_name))
+
+    df_sum = pd.read_parquet('atlup_sum.parquet')
+    selected_row_sum = df_sum[df_sum['site'] == selected_id]
+
+    st.write(selected_row_sum)
+    st.write("**All sites**")
+    st.write(df_sum)
+
+
+with tab4:
+    st.header("Signal Strength")
+    st.write("Analysis of signal strength (rsrp).")
+
+    df_str = pd.read_parquet('atlup_strength.parquet')
+    st.write(df_str)
+
+with tab5:
+    st.header("Signal Quality")
+    st.write("Analysis of signal strength (rsrq).")
+    df_qlt = pd.read_parquet('atlup_quality.parquet')
+    st.write(df_qlt)
 
 
 
