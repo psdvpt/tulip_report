@@ -76,7 +76,7 @@ df = get_canada_data()
 # Using object notation
 selected_id = st.sidebar.selectbox(
     "Select Site",
-    df['site_name']
+    df['site_name'].unique()
 )
 selected_row = df[df['site_name'] == selected_id]
 #print('Selected row = ', selected_row)
