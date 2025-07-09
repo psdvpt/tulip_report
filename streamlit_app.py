@@ -191,7 +191,7 @@ with tab5:
     st.write("Analysis of signal strength (rsrq).")
 
     #df_qlt = pd.read_parquet('atlup_quality.parquet')
-    df _qlt = get_atlup_quality()
+    df_qlt = get_atlup_quality()
     selected_row_qlt = df_qlt[df_qlt['Site'] == selected_id]
     st.write("**{}**".format(selected_id) )   
     st.write(selected_row_qlt)
