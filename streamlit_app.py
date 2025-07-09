@@ -170,7 +170,7 @@ with tab5:
 
     
     df_qlt = pd.read_parquet('atlup_quality.parquet')
-    selected_row_qlt = df_qlt[df_qlt['site'] == selected_id]
+    selected_row_qlt = df_qlt[df_qlt['Site'] == selected_id]
 
     
     st.write(selected_row_qlt)
