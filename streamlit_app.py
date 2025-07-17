@@ -85,7 +85,7 @@ with tab2:
     st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
 
     # match images with selection
-    pattern = 'data/lumen_data/*_*_{}_*.jpg'.format(site_names[0])
+    pattern = 'data/lumen_data*/*_*_{}_*.jpg'.format(site_names[0])
     file_paths = glob.glob(pattern)
     sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
 
