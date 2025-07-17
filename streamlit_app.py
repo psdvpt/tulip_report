@@ -97,14 +97,14 @@ with tab2:
     st.dataframe(df_highlighted)
 
 
-#     for str_img in sorted_paths:
-#         filename = os.path.basename(str_img)
-#         #print(filename)  # Output: 1_3_A1094_3.jpg
-#         parts = filename.split('_')
-#         last_part = parts[-1].split('.')[0]
-#         str_range = "Range: {} km".format(last_part)
-#         st.header(str_range)
-#         st.image(str_img, caption="M2c data for ...")
+    for str_img in sorted_paths:
+        filename = os.path.basename(str_img)
+        #print(filename)  # Output: 1_3_A1094_3.jpg
+        parts = filename.split('_')
+        last_part = parts[-1].split('.')[0]
+        str_range = "Range: {} km".format(last_part)
+        st.header(str_range)
+        st.image(str_img, caption="M2c data for ...")
 
 
 #     st.header('All Sites')
