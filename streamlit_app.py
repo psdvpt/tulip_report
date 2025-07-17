@@ -68,7 +68,7 @@ with tab1:
 
     # Add markers with labels to the map
     for index, row in df_loc.iterrows():
-        popup = "{}: {}".format(index, row['site_id'])
+        popup = "{}: {}".format(index, row['name'])
         folium.Marker([row['latitude'], row['longitude']], popup=popup).add_to(m)
 
 
