@@ -92,9 +92,9 @@ with tab2:
     str_header = "**{}**".format(site_name)
     st.write(str_header)
 
-#     # Highlight Column 2 with a background color
-#     df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
-#     st.dataframe(df_highlighted)
+    # Highlight Column 2 with a background color
+    df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['Tlup'])
+    st.dataframe(df_highlighted)
 
 
 #     for str_img in sorted_paths:
