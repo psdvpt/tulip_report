@@ -79,78 +79,78 @@ with tab1:
     with st.container():
         st.write(f'<div style="max-width: 500px;">{df_loc.to_html()}</div>', unsafe_allow_html=True)
 
-with tab2:
-    st.header("TLUP")
-    st.write("This is the standard TLUP report. Use the other tabs  for ATLUP summary and analysis of signal strength and quality.")
-    st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
+# with tab2:
+#     st.header("TLUP")
+#     st.write("This is the standard TLUP report. Use the other tabs  for ATLUP summary and analysis of signal strength and quality.")
+#     st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
 
-    # match images with selection
-    pattern = '*_*_{}_*.jpg'.format(site_names[0])
-    file_paths = glob.glob(pattern)
-    sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
+#     # match images with selection
+#     pattern = '*_*_{}_*.jpg'.format(site_names[0])
+#     file_paths = glob.glob(pattern)
+#     sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
 
-    str_header = "**{}**".format(site_name)
-    st.write(str_header)
+#     str_header = "**{}**".format(site_name)
+#     st.write(str_header)
 
-    # Highlight Column 2 with a background color
-    df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
-    st.dataframe(df_highlighted)
-
-
-    for str_img in sorted_paths:
-        filename = os.path.basename(str_img)
-        #print(filename)  # Output: 1_3_A1094_3.jpg
-        parts = filename.split('_')
-        last_part = parts[-1].split('.')[0]
-        str_range = "Range: {} km".format(last_part)
-        st.header(str_range)
-        st.image(str_img, caption="M2c data for ...")
+#     # Highlight Column 2 with a background color
+#     df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
+#     st.dataframe(df_highlighted)
 
 
-    st.header('All Sites')
-    # Highlight Column 2 with a background color
-    df_highlighted = df.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
-
-    st.dataframe(df_highlighted)
-
-
-with tab3:
-    st.header("ATLUP Summary")
-    st.write("**{}**".format(site_name))
-
-    #df_sum = pd.read_parquet('atlup_sum.parquet')
-    df_sum = get_atlup_sum()
-    selected_row_sum = df_sum[df_sum['site'] == selected_id]
-
-    st.write(selected_row_sum)
-    st.write("**All sites**")
-    st.write(df_sum)
+#     for str_img in sorted_paths:
+#         filename = os.path.basename(str_img)
+#         #print(filename)  # Output: 1_3_A1094_3.jpg
+#         parts = filename.split('_')
+#         last_part = parts[-1].split('.')[0]
+#         str_range = "Range: {} km".format(last_part)
+#         st.header(str_range)
+#         st.image(str_img, caption="M2c data for ...")
 
 
-with tab4:
-    st.header("Signal Strength")
-    st.write("Analysis of signal strength (rsrp).")
+#     st.header('All Sites')
+#     # Highlight Column 2 with a background color
+#     df_highlighted = df.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
 
-    #df_str = pd.read_parquet('atlup_strength.parquet')
-    df_str = get_atlup_strength()
-    selected_row_str = df_str[df_str['Site'] == selected_id]
-    st.write("**{}**".format(selected_id) )  
-    st.write(selected_row_str)
+#     st.dataframe(df_highlighted)
 
-    st.write('**All data**')    
-    st.write(df_str)
 
-with tab5:
-    st.header("Signal Quality")
-    st.write("Analysis of signal strength (rsrq).")
+# with tab3:
+#     st.header("ATLUP Summary")
+#     st.write("**{}**".format(site_name))
 
-    #df_qlt = pd.read_parquet('atlup_quality.parquet')
-    df_qlt = get_atlup_quality()
-    selected_row_qlt = df_qlt[df_qlt['Site'] == selected_id]
-    st.write("**{}**".format(selected_id) )   
-    st.write(selected_row_qlt)
-    st.write('**All data**')
-    st.write(df_qlt)
+#     #df_sum = pd.read_parquet('atlup_sum.parquet')
+#     df_sum = get_atlup_sum()
+#     selected_row_sum = df_sum[df_sum['site'] == selected_id]
+
+#     st.write(selected_row_sum)
+#     st.write("**All sites**")
+#     st.write(df_sum)
+
+
+# with tab4:
+#     st.header("Signal Strength")
+#     st.write("Analysis of signal strength (rsrp).")
+
+#     #df_str = pd.read_parquet('atlup_strength.parquet')
+#     df_str = get_atlup_strength()
+#     selected_row_str = df_str[df_str['Site'] == selected_id]
+#     st.write("**{}**".format(selected_id) )  
+#     st.write(selected_row_str)
+
+#     st.write('**All data**')    
+#     st.write(df_str)
+
+# with tab5:
+#     st.header("Signal Quality")
+#     st.write("Analysis of signal strength (rsrq).")
+
+#     #df_qlt = pd.read_parquet('atlup_quality.parquet')
+#     df_qlt = get_atlup_quality()
+#     selected_row_qlt = df_qlt[df_qlt['Site'] == selected_id]
+#     st.write("**{}**".format(selected_id) )   
+#     st.write(selected_row_qlt)
+#     st.write('**All data**')
+#     st.write(df_qlt)
 
 
 
