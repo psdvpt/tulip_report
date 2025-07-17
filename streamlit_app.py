@@ -68,7 +68,7 @@ with tab1:
     # Add markers with labels to the map
     for index, row in df_loc.iterrows():
         popup = "{}: {}".format(index, row['site_id'])
-        folium.Marker([row['lat'], row['lon']], popup=popup).add_to(m)
+        folium.Marker([row['latitude'], row['longitude']], popup=popup).add_to(m)
 
 
     # Display the map in Streamlit
