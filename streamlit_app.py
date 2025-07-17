@@ -115,12 +115,12 @@ with tab2:
 
 
 # with tab3:
-#     st.header("ATLUP Summary")
-#     st.write("**{}**".format(site_name))
+    st.header("ATLUP Summary")
+    st.write("**{}**".format(site_name))
 
-#     #df_sum = pd.read_parquet('atlup_sum.parquet')
-#     df_sum = get_atlup_sum()
-#     selected_row_sum = df_sum[df_sum['site'] == selected_id]
+    #df_sum = pd.read_parquet('atlup_sum.parquet')
+    df_sum = get_atlup_sum()
+    selected_row_sum = df_sum[df_sum['Site'] == selected_id]
 
 #     st.write(selected_row_sum)
 #     st.write("**All sites**")
