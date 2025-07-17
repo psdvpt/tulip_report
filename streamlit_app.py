@@ -118,7 +118,7 @@ with tab3:
     st.header("ATLUP Summary")
     st.write("**{}**".format(site_name))
 
-    #df_sum = pd.read_parquet('atlup_sum.parquet')
+    #df_sum = pd.read_parquet('data/lumen_data/atlup_sum.parquet')
     df_sum = get_atlup_sum()
     st.write(df_sum.columns)
     selected_row_sum = df_sum[df_sum['site'] == selected_id]
