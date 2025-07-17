@@ -16,9 +16,11 @@ st.set_page_config(
 # -----------------------------------------------------------------------------
 # Declare some useful functions.
 
+str_data = './data/lumen/'
+
 @st.cache_data
-def get_canada_data():
-    df = pd.read_parquet('tlup_canada.parquet')
+def get_tlup_data():
+    df = pd.read_parquet(str_folder + 'tlup.parquet')
     return df
     
 @st.cache_data
@@ -86,7 +88,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["Scope", "TLUP", "ATLUP Summary", "Stren
 
 
 #df = pd.read_parquet('tlup_canada.parquet')
-df = get_canada_data()
+df = get_tlup_data()
 #print(df)
 # Using object notation
 selected_id = st.sidebar.selectbox(
