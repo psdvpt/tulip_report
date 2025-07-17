@@ -120,7 +120,7 @@ with tab2:
 
     #df_sum = pd.read_parquet('atlup_sum.parquet')
     df_sum = get_atlup_sum()
-    print('df_sum', df_sum.columns)
+    st.write(df_sum.columns)
 #    selected_row_sum = df_sum[df_sum['Site'] == selected_id]
 
 #     st.write(selected_row_sum)
