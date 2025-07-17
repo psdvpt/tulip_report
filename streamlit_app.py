@@ -37,15 +37,10 @@ def get_atlup_strength():
 def get_atlup_quality():
     df = pd.read_parquet('atlup_quality.parquet')
     return df
-
-
-#gdp_df = get_gdp_data()
+#================================================================================================
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Scope", "TLUP", "ATLUP Summary", "Strength","Quality"])
 
-
-#df = pd.read_parquet('tlup_canada.parquet')
 df = get_tlup_data()
-#print(df)
 # Using object notation
 selected_id = st.sidebar.selectbox(
     "Select Site",
@@ -64,7 +59,7 @@ with tab1:
     df_loc = pd.read_parquet('tlup_loc.parquet')
     
     st.title("TLUP reports")
-    st.write("Prepared for Redwood Infrastructure LP. July 2025")
+    st.write("Prepared for Lumen, July 2025")
     st.header("Site Locations")
 
     # Create a Folium map
