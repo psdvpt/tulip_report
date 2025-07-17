@@ -124,8 +124,8 @@ with tab3:
     selected_row_sum = df_sum[df_sum['site'] == selected_id]
 
     st.write(selected_row_sum)
-#     st.write("**All sites**")
-#     st.write(df_sum)
+    st.write("**All sites**")
+    st.write(df_sum)
 
 
 # with tab4:
