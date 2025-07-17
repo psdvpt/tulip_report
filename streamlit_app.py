@@ -26,7 +26,7 @@ def get_tlup_data():
     
 @st.cache_data
 def get_atlup_sum():
-    df = pd.read_parquet('atlup_sum.parquet')
+    df = pd.read_parquet(str_data + 'atlup_sum.parquet')
     return df
 
 @st.cache_data
