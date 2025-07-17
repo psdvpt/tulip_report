@@ -20,7 +20,7 @@ str_data = './data/lumen/'
 
 @st.cache_data
 def get_tlup_data():
-    df = pd.read_parquet(str_folder + 'tlup.parquet')
+    df = pd.read_parquet(str_data + 'tlup.parquet')
     return df
     
 @st.cache_data
