@@ -16,7 +16,7 @@ st.set_page_config(
 # -----------------------------------------------------------------------------
 # Declare some useful functions.
 
-str_data = 'data/lumen/'
+str_data = 'data/lumen_data/'
 
 @st.cache_data
 def get_tlup_data():
@@ -56,7 +56,7 @@ site_name = site_names[0]
 st.set_page_config(layout="wide")
 with tab1:
     st.image('ambiflo_icon.png', width = 300)
-    df_loc = pd.read_parquet('data/lumen/tlup_loc.parquet')
+    df_loc = pd.read_parquet('data/lumen_data/tlup_loc.parquet')
     
     st.title("TLUP reports")
     st.write("Prepared for Lumen, July 2025")
