@@ -14,6 +14,7 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
+
 # Declare some useful functions.
 
 str_data = 'data/lumen_data/'
