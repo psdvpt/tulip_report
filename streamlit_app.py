@@ -44,7 +44,7 @@ df = get_tlup_data()
 # Using object notation
 selected_id = st.sidebar.selectbox(
     "Select Site",
-    df['Name'].unique()
+    df['Name'].unique() #site_name
 )
 selected_row = df[df['Name'] == selected_id]
 #print('Selected row = ', selected_row)
