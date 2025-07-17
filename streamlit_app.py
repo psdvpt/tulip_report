@@ -114,16 +114,16 @@ with tab2:
 #     st.dataframe(df_highlighted)
 
 
-# with tab3:
+with tab3:
     st.header("ATLUP Summary")
     st.write("**{}**".format(site_name))
 
     #df_sum = pd.read_parquet('atlup_sum.parquet')
     df_sum = get_atlup_sum()
     st.write(df_sum.columns)
-#    selected_row_sum = df_sum[df_sum['Site'] == selected_id]
+    selected_row_sum = df_sum[df_sum['site'] == selected_id]
 
-#     st.write(selected_row_sum)
+    st.write(selected_row_sum)
 #     st.write("**All sites**")
 #     st.write(df_sum)
 
