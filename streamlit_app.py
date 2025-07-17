@@ -79,18 +79,18 @@ with tab1:
     with st.container():
         st.write(f'<div style="max-width: 500px;">{df_loc.to_html()}</div>', unsafe_allow_html=True)
 
-# with tab2:
-#     st.header("TLUP")
-#     st.write("This is the standard TLUP report. Use the other tabs  for ATLUP summary and analysis of signal strength and quality.")
-#     st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
+with tab2:
+    st.header("TLUP")
+    st.write("This is the standard TLUP report. Use the other tabs  for ATLUP summary and analysis of signal strength and quality.")
+    st.write("Use the list control on the left side panel to select the site and the results will be shown below. The complete table is presented at the foot of this page.")
 
-#     # match images with selection
-#     pattern = '*_*_{}_*.jpg'.format(site_names[0])
-#     file_paths = glob.glob(pattern)
-#     sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
+    # match images with selection
+    pattern = '*_*_{}_*.jpg'.format(site_names[0])
+    file_paths = glob.glob(pattern)
+    sorted_paths = sorted(file_paths, key=lambda x: x.split("/")[-1].split("_")[3])
 
-#     str_header = "**{}**".format(site_name)
-#     st.write(str_header)
+    str_header = "**{}**".format(site_name)
+    st.write(str_header)
 
 #     # Highlight Column 2 with a background color
 #     df_highlighted = selected_row.style.set_properties(**{'background-color': 'yellow'}, subset=['tlup'])
